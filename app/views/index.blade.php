@@ -17,8 +17,8 @@
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a href="/">Home</a></li>
-          <li><a href="/lorem">Lorem</a></li>
-          <li><a href="/usergenerator">Users</a></li>
+          <li><a href="/resume">Resume Builder</a></li>
+          <li><a href="/usergenerator">Other Button</a></li>
         </ul>
         <h3 class="text-muted">Resume Builder</h3>
       </div>
@@ -29,9 +29,9 @@
 	<div class = "row">
 		<div class = "col-md-6">
 			<h4>Development Tools:</h4>
-			<a href = '/lorem' role="button" class="btn btn-default">Lorem Ipsum Generator</a>
+			<a href = '/resume' role="button" class="btn btn-default">Resume Builder</a>
 			<br><br>
-			<a href = '/usergenerator' role="button" class="btn btn-default">Random User Generator</a>
+			<a href = '/usergenerator' role="button" class="btn btn-default">other button</a>
 			<br><br>
 		</div>
 

@@ -18,29 +18,22 @@ Route::get('/', function(){
 });
 
 
-Route::get('/lorem', function() {
+Route::get('/resume', function() {
 
 
-    $paragraphs = 0;
-    $lorem = '';
-    return View::make('lorem')
-        ->with('paragraphs', $paragraphs)
-        ->with('lorem', $lorem);
+    $input = '';
+
+    return View::make('resume')
+        ->with('input', $input);
 });
 
-Route::post('/lorem', function(){
+Route::post('/resume', function(){
+    //$input = implode(Input::all());
     $input = Input::all();
     //print_r($input);
 
-    $numParagraphs = $input['numberOfParagraphs'];
-
-    $generator = new Badcow\LoremIpsum\Generator();
-    $paragraphs = $generator->getParagraphs($numParagraphs);
-    $allParagraphs = implode('<p>', $paragraphs);
-
-    return View::make('lorem')
-        ->with('paragraphs', $numParagraphs)
-        ->with('lorem', $allParagraphs);
+    return View::make('resume')
+        ->with('input', $input);
 
 });
 

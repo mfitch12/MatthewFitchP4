@@ -17,10 +17,10 @@
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li><a href="/">Home</a></li>
-          <li><a href="/lorem">Lorem</a></li>
-          <li class="active"><a href="/usergenerator">Users</a></li>
+          <li><a href="/resume">Resume Builder</a></li>
+          <li class="active"><a href="/usergenerator">Other Button</a></li>
         </ul>
-        <h3 class="text-muted">Developer's Best Friend</h3>
+        <h3 class="text-muted">Resume Builder</h3>
       </div>
 @stop
 
@@ -50,7 +50,7 @@
 	</div>
 	<div class = "col-md-6">
 		<p>Other Developer Tools:</p>
-		<a href = '/lorem' role="button" class="btn btn-default">Lorem Ipsum Generator</a>
+		<a href = '/resume' role="button" class="btn btn-default">Resume Builder</a>
 		<br><br>
 	</div>
 	</div>
