@@ -18,7 +18,7 @@
         <ul class="nav nav-pills pull-right">
           <li><a href="/">Home</a></li>
           <li><a href="/resume">Resume Builder</a></li>
-          <li class="active"><a href="/usergenerator">Other Button</a></li>
+          <li class="active"><a href="/yourResume">Other Button</a></li>
         </ul>
         <h3 class="text-muted">Resume Builder</h3>
       </div>

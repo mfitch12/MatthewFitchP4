@@ -20,7 +20,7 @@
           <li class="active"><a href="/resume">Resume Builder</a></li>
 
         @if(Auth::check())
-          <li><a href="/usergenerator">Your Resumes</a></li>
+          <li><a href="/yourResume">Your Resumes</a></li>
         @endif
 
         </ul>

@@ -20,7 +20,7 @@
           <li><a href="/resume">Resume Builder</a></li>
         
         @if(Auth::check())
-          <li><a href="/usergenerator">Your Resumes</a></li>
+          <li><a href="/yourResume">Your Resumes</a></li>
         @endif
         
         </ul>
@@ -35,7 +35,7 @@
 			<h4>Development Tools:</h4>
 			<a href = '/resume' role="button" class="btn btn-default">Resume Builder</a>
 			<br><br>
-			<a href = '/usergenerator' role="button" class="btn btn-default">other button</a>
+			<a href = '/yourResume' role="button" class="btn btn-default">Your Resumes</a>
 			<br><br>
 		</div>
 
