@@ -18,7 +18,11 @@
         <ul class="nav nav-pills pull-right">
           <li class="active"><a href="/">Home</a></li>
           <li><a href="/resume">Resume Builder</a></li>
-          <li><a href="/usergenerator">Other Button</a></li>
+        
+        @if(Auth::check())
+          <li><a href="/usergenerator">Your Resumes</a></li>
+        @endif
+        
         </ul>
         <h3 class="text-muted">Resume Builder</h3>
       </div>
