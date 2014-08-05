@@ -27,6 +27,79 @@ Route::get('mysql-test', function() {
 
 });
 
+Route::get('/practice-creating', function() {
+
+    # Instantiate a new Book model class
+    $resume = new Resume();
+
+    # Set 
+    $resume->name = 'Matthew Fitch';
+    $resume->address = '570 Pleasant Street, Marshfield, MA 02050';
+    $resume->email = 'mrf088@gmail.com';
+    $resume->job_title = 'Verizon Wireless - Retail Sales';
+    $resume->job_description = 'sales, customer service, IT support';
+    $resume->school_name = 'University of Maine';
+
+    # This is where the Eloquent ORM magic happens
+    $resume->save();
+
+    return 'A new resume has been added! Check your database to see...';
+
+});
+
+Route::get('/practice-reading', function() {
+
+    # The all() method will fetch all the rows from a Model/table
+    $resumes = Resume::all();
+
+    # Typically we'd pass $books to a View, but for quick and dirty demonstration, let's just output here...
+    
+        echo Pre::r($resumes);
+  
+
+});
+
+Route::get('/practice-reading-one-resume', function() {
+
+    # The all() method will fetch all the rows from a Model/table
+    $resume = Resume::where('name', 'LIKE', '%Fitch%')->first();
+
+        //returns the email address for the first person with name like Fitch
+        return $resume->email;
+
+});
+
+Route::get('/practice-updating', function(){
+
+    //get resume with email address mrf088@gmail.com
+    $resume = Resume::where('email', 'LIKE', '%mrf088%') -> first();
+
+    //change the address to PO Box
+    $resume->address = 'PO Box 58, Marshfield Hills, MA 02051';
+
+    //Save changes
+    $resume->save();
+
+    return "update complete. check database for changes";
+
+
+});
+
+Route::get('/practice-deleting', function(){
+
+    //get resume with email address mrf088@gmail.com
+    $resume = Resume::where('email', 'LIKE', '%mrf088%') -> first();
+
+    //delete row
+    $resume->delete();
+
+    return "deletion complete. check database for changes";
+
+
+});
+
+
+
 Route::get('/resume', function() {
 
 
