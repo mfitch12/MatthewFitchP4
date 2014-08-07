@@ -12,7 +12,7 @@ It is currently in a functional, but limited, state. The resume fields, for exam
 
 In order to use the application, you will have to create a username and password.
 
-You can create, view, and delete, as many resumes as you want. Editing of a current resume, however, is not implemented.
+You can create, view, and delete as many resumes as you want. Editing of a current resume, however, is not implemented.
 
 ## Details for teaching team
 I used bootstrap. I used elements of bootstrap's "narrow jumbotron theme" css styles. I also included bootstrap.min.js and jquery library, but did not utililze javascript in this project.

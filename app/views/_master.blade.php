@@ -8,7 +8,7 @@
 
     <title>Fitch - Project 4</title>
 
-    <link href= '{{ asset('css/bootstrap.min.css') }}' rel='stylesheet'>
+    <link href='{{ asset('css/bootstrap.min.css') }}' rel='stylesheet'>
     <link href='{{ asset('css/style.css') }}' rel="stylesheet">
 
     @yield('head')
@@ -37,7 +37,7 @@
 	-->
 
 	  <div class="jumbotron">
-	    <h2 class = "randomWords">@yield('title')</h2>
+	    <h2 class ="randomWords">@yield('title')</h2>
 	    <p class="lead">@yield('description')</p>
 	    
 	  </div>
@@ -47,8 +47,8 @@
 
     <div class="footer">
       <div class="centerIMG">
-      <a href = "http://www.fitchwebdesign.com">
-      <img src = "/images/fitchLogo.png" alt="logo">
+      <a href="http://www.fitchwebdesign.com">
+      <img src="/images/fitchLogo.png" alt="logo">
       </a>
       </div>
     </div>

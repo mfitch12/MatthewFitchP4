@@ -24,8 +24,8 @@
 @stop
 
 @section('content')
-	<div class = "row myResume">
-		<div class = "col-md-12">
+	<div class="row myResume">
+		<div class="col-md-12">
 			<h3 class="text-center">{{$name}}</h3>
 			<h5 class="text-center">{{$address}}</h5>
 			<h5 class="text-center">{{$email}}</h5>

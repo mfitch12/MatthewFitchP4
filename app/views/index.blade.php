@@ -33,9 +33,9 @@
 	<div class = "row">
 		<div class = "col-md-6">
 			<h4>Tools:</h4>
-			<a href = '/resume' role="button" class="btn btn-default">Resume Builder</a>
+			<a href='/resume' role="button" class="btn btn-default">Resume Builder</a>
 			<br><br>
-			<a href = '/yourResume' role="button" class="btn btn-default">Your Resumes</a>
+			<a href='/yourResume' role="button" class="btn btn-default">Your Resumes</a>
 			<br><br>
 		</div>
 
