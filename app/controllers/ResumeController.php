@@ -8,6 +8,21 @@ class ResumeController extends BaseController{
 	}
 	*/
 
+	public function getIndex()
+	{
+	    $signedIn = '';
+	    if (Auth::check())
+	    {
+	        $signedIn = 'Please choose from one of the options below.';
+	    }
+	    else
+	    {
+	        $signedIn = 'You must be logged in to use Resume Builder. <br><a href="/login">log in</a><br>or<br><a href="/signup">sign up</a>';
+	    }
+	    return View::make('index')
+	        ->with('signedIn', $signedIn);
+	}
+
 	public function getResume()
 	{
 	    if (Auth::check())
@@ -60,7 +75,6 @@ class ResumeController extends BaseController{
 
 	    return Redirect::to('/yourResume');
 	}
-
 
 
 
