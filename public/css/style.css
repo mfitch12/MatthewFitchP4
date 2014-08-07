@@ -23,6 +23,10 @@ body {
   padding-left: 15px;
 }
 
+.myResume{
+  background-color: #EEEEEE;
+  border-style: ridge;
+}
 .randomWords{
 	color: #5cb85c;
 }
