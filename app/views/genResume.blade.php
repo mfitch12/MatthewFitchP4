@@ -44,7 +44,7 @@
 
 	<div class="footer">
 	<p>	
-
+		<a href="{{$deleteLink}}">delete resume</a>
 
 	</p>
 

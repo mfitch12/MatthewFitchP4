@@ -5,7 +5,7 @@
 @stop
 
 @section('description')
-	Select the resume you wish to view or edit
+	Select the resume you wish to view or edit below
 @stop
 
 @section('head')

@@ -199,115 +199,10 @@ Route::get('/get-environment',function() {
 
 });
 
-Route::get('/debug', function() {
 
-    echo '<pre>';
+Route::get('/resume', 'ResumeController@getResume');
 
-    echo '<h1>environment.php</h1>';
-    $path   = base_path().'/environment.php';
-
-    try {
-        $contents = 'Contents: '.File::getRequire($path);
-        $exists = 'Yes';
-    }
-    catch (Exception $e) {
-        $exists = 'No. Defaulting to `production`';
-        $contents = '';
-    }
-
-    echo "Checking for: ".$path.'<br>';
-    echo 'Exists: '.$exists.'<br>';
-    echo $contents;
-    echo '<br>';
-
-    echo '<h1>Environment</h1>';
-    echo App::environment().'</h1>';
-
-    echo '<h1>Debugging?</h1>';
-    if(Config::get('app.debug')) echo "Yes"; else echo "No";
-
-    echo '<h1>Database Config</h1>';
-    print_r(Config::get('database.connections.mysql'));
-
-    echo '<h1>Test Database Connection</h1>';
-    try {
-        $results = DB::select('SHOW DATABASES;');
-        echo '<strong style="background-color:green; padding:5px;">Connection confirmed</strong>';
-        echo "<br><br>Your Databases:<br><br>";
-        print_r($results);
-    } 
-    catch (Exception $e) {
-        echo '<strong style="background-color:crimson; padding:5px;">Caught exception: ', $e->getMessage(), "</strong>\n";
-    }
-
-    echo '</pre>';
-
-});
-
-Route::get('/resume', function(){
-
-    if (Auth::check())
-    {
-        return View::make('resume');
-    }
-    else
-    {
-        return View::make('login');
-    }
-
-
-});
-
-Route::post('/resume', function(){
-    //$input = implode(Input::all());
-   
-
-
-    $resumeTitle = Input::get('titleInput', 'blank');
-    $name = Input::get('nameInput', 'blank');
-    $address = Input::get('addressInput', 'blank');
-    $email = Input::get('emailInput', 'blank');
-    $jobTitle = Input::get('jobInput', 'blank');
-    $jobDescription = Input::get('descriptionInput', 'blank');
-    $schoolName = Input::get('schoolInput', 'blank');
-    $user = Auth::user()->email;
-
-    $input = $resumeTitle;
-
-    # Instantiate a new Resume model class
-    $resume = new Resume();
-
-    # Set 
-    $resume->resume_title = $resumeTitle;
-    $resume->name = $name;
-    $resume->address = $address;
-    $resume->email = $email;
-    $resume->job_title = $jobTitle;
-    $resume->job_description = $jobDescription;
-    $resume->school_name = $schoolName;
-    $resume->user_name = $user;
-
-    # This is where the Eloquent ORM magic happens
-    $resume->save();
-
-    $currentUser = Auth::user();
-    //get resume with email address mrf088@gmail.com
-
-    $count = $currentUser->resume_count;
-    //change the address to PO Box
-    $currentUser->resume_count = $count + 1;
-
-    //Save changes
-    $currentUser->save();
-
-
-    //print_r($input);
-
-   // return Redirect::to('/yourResume');
-
-
-
-});
+Route::post('/resume', 'ResumeController@postResume');
 
 Route::get('/{format?}', 
     array(
@@ -364,7 +259,7 @@ Route::get('genResume/{resumeTitle}', function($resumeId)
     $jobTitle = $resume->job_title;
     $jobDescription = $resume->job_description;
     $schoolName = $resume->school_name;
-
+    $deleteLink = '/deleteResume/'.$resumeId;
 
     return View::make('genResume')
         ->with('resumeTitle', $resumeTitle)
@@ -373,9 +268,18 @@ Route::get('genResume/{resumeTitle}', function($resumeId)
         ->with('email', $email)
         ->with('jobTitle', $jobTitle)
         ->with('jobDescription', $jobDescription)
-        ->with('schoolName', $schoolName);
+        ->with('schoolName', $schoolName)
+        ->with('deleteLink', $deleteLink);
 
 });
+
+Route::get('deleteResume/{resumeId}', function($resumeId)
+{
+    $resume = Resume::where('id', '=', $resumeId)->first();
+    $resume->delete();
+    return Redirect::to('/yourResume');
+});
+
 
 
 
