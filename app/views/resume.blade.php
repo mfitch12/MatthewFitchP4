@@ -1,7 +1,7 @@
 @extends('_master')
 
 @section('title')
-    Resume Generator
+    Resume Builder
 @stop
 
 @section('description')
