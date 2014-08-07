@@ -69,7 +69,7 @@
 
 	<div class="footer">
 		<p>	
-			input: <?echo $input ?> <br><br>
+		
 		</p>	
 	</div>
 @stop

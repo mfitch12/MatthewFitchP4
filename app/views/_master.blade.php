@@ -21,9 +21,7 @@
   	
   	<div class="container">
 
-    @if(Session::get('flash_message'))
-        <div class='flash-message'>{{ Session::get('flash_message') }}</div>
-    @endif
+
     @if(Auth::check())
     <a href='/logout'>Log out: {{ Auth::user()->email; }}</a>
     @else 

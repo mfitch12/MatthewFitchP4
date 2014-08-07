@@ -5,7 +5,7 @@
 @stop
 
 @section('description')
-	Select one of the options below.
+	{{$signedIn}}
 @stop
 
 @section('head')

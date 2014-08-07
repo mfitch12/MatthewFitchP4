@@ -13,8 +13,17 @@
 
 Route::get('/', function(){
     $paragraphs = 0;
+    $signedIn = '';
+    if (Auth::check())
+    {
+        $signedIn = 'Please choose from one of the options below.';
+    }
+    else
+    {
+        $signedIn = 'You must be logged in to use Resume Builder. <br><a href="/login">log in</a><br>or<br><a href="/signup">sign up</a>';
+    }
     return View::make('index')
-        ->with('paragraphs', $paragraphs);
+        ->with('signedIn', $signedIn);
 });
 
 Route::get('/signup',
@@ -74,7 +83,7 @@ Route::post('/login',
                 return Redirect::intended('/')->with('flash_message', 'Welcome Back!');
             }
             else {
-                return Redirect::to('/login')->with('flash_message', 'Log in failed; please try again.');
+                return Redirect::to('/login')->with('flash_message', 'username or password incorrect. please try again.');
             }
 
             return Redirect::to('login');
@@ -235,22 +244,19 @@ Route::get('/debug', function() {
 
 });
 
+Route::get('/resume', function(){
 
-Route::get('/resume', function() {
+    if (Auth::check())
+    {
+        return View::make('resume');
+    }
+    else
+    {
+        return View::make('login');
+    }
 
 
-    $input = '';
-
-    return View::make('resume')
-        ->with('input', $input);
 });
-
-Route::get('/test2', function(){
-
-    $user = Auth::user();
-    return $user->resume_count;
-});
-
 
 Route::post('/resume', function(){
     //$input = implode(Input::all());
@@ -297,7 +303,7 @@ Route::post('/resume', function(){
 
     //print_r($input);
 
-    return Redirect::to('/yourResume');
+   // return Redirect::to('/yourResume');
 
 
 
