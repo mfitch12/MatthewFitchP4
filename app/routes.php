@@ -133,54 +133,11 @@ Route::get('/{format?}',
     )
 );
 
-//Route::pattern('id', '[0-9]+');
 
-Route::get('genResume/{resumeTitle}', function($resumeId)
-{
-    $resume = Resume::where('id', '=', $resumeId)->first();
+Route::get('genResume/{resumeId}', 'ResumeController@getGenResume');
 
-        //returns the email address for the first person with name like Fitch
-
-    $resumeTitle = $resume->resume_title;
-    $name = $resume->name;
-    $address = $resume->address;
-    $email = $resume->email;
-    $jobTitle = $resume->job_title;
-    $jobDescription = $resume->job_description;
-    $schoolName = $resume->school_name;
-    $deleteLink = '/deleteResume/'.$resumeId;
-
-    return View::make('genResume')
-        ->with('resumeTitle', $resumeTitle)
-        ->with('name', $name)
-        ->with('address', $address)
-        ->with('email', $email)
-        ->with('jobTitle', $jobTitle)
-        ->with('jobDescription', $jobDescription)
-        ->with('schoolName', $schoolName)
-        ->with('deleteLink', $deleteLink);
-
-});
-
-Route::get('deleteResume/{resumeId}', function($resumeId)
-{
-    $resume = Resume::where('id', '=', $resumeId)->first();
-    $resume->delete();
-    return Redirect::to('/yourResume');
-});
+Route::get('deleteResume/{resumeId}', 'ResumeController@getDeleteResume');
 
 
 
-
-Route::get('/test', function()
-{
-	echo 'Hello World';
-});
-
-
-Route::get('/practice', function() {
-
-    echo App::environment();
-
-});
 

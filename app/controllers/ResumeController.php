@@ -76,6 +76,43 @@ class ResumeController extends BaseController{
 	    return Redirect::to('/yourResume');
 	}
 
+	public function getGenResume($resumeId)
+	{
+	    $resume = Resume::where('id', '=', $resumeId)->first();
+
+	    $resumeTitle = $resume->resume_title;
+	    $name = $resume->name;
+	    $address = $resume->address;
+	    $email = $resume->email;
+	    $jobTitle = $resume->job_title;
+	    $jobDescription = $resume->job_description;
+	    $schoolName = $resume->school_name;
+	    $deleteLink = '/deleteResume/'.$resumeId;
+
+	    return View::make('genResume')
+	        ->with('resumeTitle', $resumeTitle)
+	        ->with('name', $name)
+	        ->with('address', $address)
+	        ->with('email', $email)
+	        ->with('jobTitle', $jobTitle)
+	        ->with('jobDescription', $jobDescription)
+	        ->with('schoolName', $schoolName)
+	        ->with('deleteLink', $deleteLink);
+	}
+
+	public function getDeleteResume($resumeId)
+	{
+		$resume = Resume::where('id', '=', $resumeId)->first();
+	    $resume->delete();
+	    return Redirect::to('/yourResume');
+	}
+
+
+
+
+
+
+
 
 
 }
