@@ -109,6 +109,7 @@ Route::get('/practice-creating', function() {
     $resume = new Resume();
 
     # Set 
+    $resume->resume_title = 'Resume1';
     $resume->name = 'Matthew Fitch';
     $resume->address = '570 Pleasant Street, Marshfield, MA 02050';
     $resume->email = 'mrf088@gmail.com';
@@ -244,34 +245,131 @@ Route::get('/resume', function() {
         ->with('input', $input);
 });
 
+Route::get('/test2', function(){
+
+    $user = Auth::user();
+    return $user->resume_count;
+});
+
+
 Route::post('/resume', function(){
     //$input = implode(Input::all());
-    $input = Input::all();
+   
+
+
+    $resumeTitle = Input::get('titleInput', 'blank');
+    $name = Input::get('nameInput', 'blank');
+    $address = Input::get('addressInput', 'blank');
+    $email = Input::get('emailInput', 'blank');
+    $jobTitle = Input::get('jobInput', 'blank');
+    $jobDescription = Input::get('descriptionInput', 'blank');
+    $schoolName = Input::get('schoolInput', 'blank');
+    $user = Auth::user()->email;
+
+    $input = $resumeTitle;
+
+    # Instantiate a new Resume model class
+    $resume = new Resume();
+
+    # Set 
+    $resume->resume_title = $resumeTitle;
+    $resume->name = $name;
+    $resume->address = $address;
+    $resume->email = $email;
+    $resume->job_title = $jobTitle;
+    $resume->job_description = $jobDescription;
+    $resume->school_name = $schoolName;
+    $resume->user_name = $user;
+
+    # This is where the Eloquent ORM magic happens
+    $resume->save();
+
+    $currentUser = Auth::user();
+    //get resume with email address mrf088@gmail.com
+
+    $count = $currentUser->resume_count;
+    //change the address to PO Box
+    $currentUser->resume_count = $count + 1;
+
+    //Save changes
+    $currentUser->save();
+
+
     //print_r($input);
 
-    return View::make('resume')
-        ->with('input', $input);
+    return Redirect::to('/yourResume');
+
+
 
 });
 
 Route::get('/{format?}', 
     array(
         'before' => 'auth', 
-        function($format = 'yourResumes') {
+        function($format = 'yourResume') {
             # rest of your list code goes here...
                 $users = 0;
                 $userAddress = 'off';
                 $profile = 'off';
                 $userString = '';
 
+                $userName = Auth::user()->email;
+
+                $resumes = Resume::where('user_name', '=', $userName)->get(/**(array('resume_title'))**/);
+
+                $titleList = '';
+
+                $x = 0;
+                foreach($resumes as $title)
+                {
+                    $x++;
+                    if($title->resume_title != '')
+                    {
+                        $titleList .= '<a href="/genResume/'.$title->id.'">'.$title->resume_title.'</a><br><br>' ;
+                    }
+                    else
+                    {
+                        $titleList .= '<a href="/genResume/'.$title->id.'">'.'RESUME HAS NO TITLE'.'</a><br><br>' ;
+                    }
+
+                }
+
+                
+
                 return View::make('yourResume')
-                    ->with('users', $users)
-                    ->with('userAddress', $userAddress)
-                    ->with('profile', $profile)
-                    ->with('userString', $userString);
+
+                    ->with('resumeLinks', $titleList);
         }
     )
 );
+
+//Route::pattern('id', '[0-9]+');
+
+Route::get('genResume/{resumeTitle}', function($resumeId)
+{
+    $resume = Resume::where('id', '=', $resumeId)->first();
+
+        //returns the email address for the first person with name like Fitch
+
+    $resumeTitle = $resume->resume_title;
+    $name = $resume->name;
+    $address = $resume->address;
+    $email = $resume->email;
+    $jobTitle = $resume->job_title;
+    $jobDescription = $resume->job_description;
+    $schoolName = $resume->school_name;
+
+
+    return View::make('genResume')
+        ->with('resumeTitle', $resumeTitle)
+        ->with('name', $name)
+        ->with('address', $address)
+        ->with('email', $email)
+        ->with('jobTitle', $jobTitle)
+        ->with('jobDescription', $jobDescription)
+        ->with('schoolName', $schoolName);
+
+});
 
 
 

@@ -23,12 +23,14 @@ class CreateResumesTable extends Migration {
 	        $table->timestamps();
 
 	        // The rest of the fields...
+	        $table->string('resume_title');
 	        $table->string('name');
 	        $table->string('address');
 	        $table->string('email');
 	        $table->string('job_title');
 	        $table->text('job_description');
 	        $table->string('school_name');
+	        $table->string('user_name');
 
 	        // FYI: We're skipping the 'tags' field for now; more on that later.
 
